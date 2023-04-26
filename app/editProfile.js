@@ -3,10 +3,20 @@ import ChangePhoto from "../myComponents/buttons/put_image";
 import Back from "../myComponents/buttons/back_button_light_mode";
 import Confirm from "../myComponents/buttons/confirm_button";
 import {useRouter} from "expo-router";
+import {useState} from "react";
 
 export default function editProfile() {
 
 	const router = useRouter();
+
+	// username
+	const [username, setUsername] = useState("");
+
+	// email
+	const [email, setEmail] = useState("");
+
+	// phone number
+	const [phoneNumber, setPhoneNumber] = useState("");
 
 	const confirmHandler = () => {
 		router.push("./profile");
@@ -35,16 +45,19 @@ export default function editProfile() {
 							style={styles.input}
 							placeholder={"User name"}
 							placeholderTextColor={"#CCC"}
+							onChangeText={setUsername}
 						/>
 						<TextInput
 							style={styles.input}
-							placeholder={"User name"}
+							placeholder={"Email"}
 							placeholderTextColor={"#CCC"}
+							onChangeText={setEmail}
 						/>
 						<TextInput
 							style={styles.input}
-							placeholder={"User name"}
+							placeholder={"Phone number"}
 							placeholderTextColor={"#CCC"}
+							onChangeText={setPhoneNumber}
 						/>
 					</View>
 
