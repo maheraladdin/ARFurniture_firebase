@@ -37,10 +37,7 @@ export default function editProfile() {
 						<ChangePhoto />
 					</TouchableOpacity>
 
-					<View
-						style={styles.inputContainer}
-						behavior={"padding"}
-					>
+					<View style={styles.inputContainer}>
 						<TextInput
 							style={styles.input}
 							placeholder={"User name"}

@@ -5,25 +5,71 @@ import {
 	ScrollView,
 	TextInput,
 	ImageBackground,
-	Dimensions
+	Dimensions,
+	KeyboardAvoidingView,
+	TouchableOpacity
 } from "react-native";
 import Back from "../myComponents/buttons/back_button_light_mode";
+import {useState} from "react";
 import ConBtn from "../myComponents/buttons/continue_button";
 import LoginFace from "../myComponents/buttons/login_with_facebook_button";
 import LoginGoogle from "../myComponents/buttons/login_with_google";
 import SignUp from "../myComponents/buttons/sign_up_button";
-
-const image = { uri: "https://via.placeholder.com/200x100" };
+import {useRouter} from "expo-router";
 
 export default function login() {
-	return (
-		<ScrollView>
-			<Back />
-			<ImageBackground source={image} style={styles.image}>
-				<Text style={styles.imageText}>AR Furniture</Text>
-			</ImageBackground>
 
-		</ScrollView>
+	// username
+	const [email, setEmail] = useState("");
+
+	// email
+	const [password, setPassword] = useState("");
+
+	const router = useRouter();
+
+	return (
+		<KeyboardAvoidingView
+			behavior={"padding"}
+		>
+			<ScrollView>
+				<Back />
+				<ImageBackground source={{uri: "https://firebasestorage.googleapis.com/v0/b/arfurniture-2d013.appspot.com/o/backgrounds%2Flogin.png?alt=media&token=06509f3a-2ca6-48d8-bdd4-1db0864667b6"}} style={styles.image}>
+					<Text style={styles.imageText}>AR Furniture</Text>
+				</ImageBackground>
+
+				<View
+					style={styles.inputContainer}
+					behavior={"padding"}
+				>
+					<TextInput
+						style={styles.input}
+						placeholder={"email"}
+						placeholderTextColor={"#CCC"}
+						onChangeText={setEmail}
+						value={email}
+					/>
+					<TextInput
+						style={styles.input}
+						placeholder={"password"}
+						placeholderTextColor={"#CCC"}
+						onChangeText={setPassword}
+						value={password}
+						secureTextEntry={true}
+					/>
+					<TouchableOpacity>
+						<LoginFace />
+					</TouchableOpacity>
+					<TouchableOpacity>
+						<LoginGoogle />
+					</TouchableOpacity>
+					<ConBtn activity={"home"}/>
+					<TouchableOpacity onPress={() => router.push("signUp")}>
+						<SignUp />
+					</TouchableOpacity>
+				</View>
+
+			</ScrollView>
+		</KeyboardAvoidingView>
 	);
 }
 
@@ -40,5 +86,22 @@ const styles = StyleSheet.create({
 	},
 	imageText: {
 		fontSize: 30,
+		color: "#518379",
+	},
+	input : {
+		width: Dimensions.get("window").width - 20,
+		height: 50,
+		borderStyle: "solid",
+		borderWidth: 1,
+		borderRadius: 25,
+		padding: 25,
+		fontSize: 15,
+	},
+	inputContainer : {
+		marginTop: 200,
+		flex: 1,
+		alignItems: "center",
+		gap: 30,
+		marginBottom: 20,
 	}
 });
