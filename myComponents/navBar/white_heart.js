@@ -1,12 +1,23 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 import {TouchableOpacity} from "react-native";
+import {checkLogin} from "../../logic/checkLogin";
+import {DialogLogin} from "../DialogLogin";
+import {useState} from "react";
 
 function WhiteHeart(props) {
+	const [visible,setVisible] = useState(false);
+	const isLogin = checkLogin();
 	return (
 		<TouchableOpacity onPress={() => {
-			props.setNavigate("wishList");
-			props.router.push("/wishList");
+			if(isLogin._j) {
+				console.log(isLogin)
+				props.setNavigate("wishList");
+				props.router.push("/wishList");
+			}
+			else {
+				setVisible(true);
+			}
 		}}>
 			<Svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -21,6 +32,7 @@ function WhiteHeart(props) {
 					fill="#f8f9fa"
 				/>
 			</Svg>
+			<DialogLogin visible={visible} setVisible={setVisible}/>
 		</TouchableOpacity>
 	);
 }

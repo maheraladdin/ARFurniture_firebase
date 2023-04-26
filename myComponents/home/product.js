@@ -3,10 +3,18 @@ import RedHeart from "./red_heart";
 import RedHeartFilled from "./red_heart_filled";
 import AddCart from "../buttons/add_to_cart_button_home_page";
 import { useState } from "react";
+import {checkLogin} from "../../logic/checkLogin";
+import {DialogLogin} from "../DialogLogin";
+import AddedCart from "../buttons/addedCart";
+import * as React from "react";
 
 export default function Product({heartState,title,price,image}) {
 
 	const [filled, setFilled] = useState(heartState);
+	const [added, setAdded] = useState(false);
+
+	const [visible,setVisible] = useState(false);
+	const isLogin = checkLogin();
 
 	return (
 		<ImageBackground
@@ -19,7 +27,14 @@ export default function Product({heartState,title,price,image}) {
 
 			{/* Heart */}
 			<View style={styles.redHeart}>
-				<TouchableOpacity onPress={() => setFilled(!filled)}>
+				<TouchableOpacity onPress={() => {
+					if(isLogin._j) {
+						setFilled(!filled);
+					}
+					else {
+						setVisible(true);
+					}
+				}}>
 					{filled ? <RedHeartFilled/> : <RedHeart/>}
 				</TouchableOpacity>
 			</View>
@@ -31,10 +46,19 @@ export default function Product({heartState,title,price,image}) {
 				</Text>
 				<View style={styles.cartContainer}>
 					<Text style={styles.productPrice}>{!price ? 50 : price}$</Text>
-					<AddCart />
+					<TouchableOpacity onPress={() => {
+						if(isLogin._j) {
+							setAdded(!added);
+						}
+						else {
+							setVisible(true);
+						}
+					}}>
+						{added ? <AddedCart /> : <AddCart />}
+					</TouchableOpacity>
 				</View>
 			</View>
-
+			<DialogLogin visible={visible} setVisible={setVisible}/>
 		</ImageBackground>
 	);
 }

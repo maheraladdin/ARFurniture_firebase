@@ -1,13 +1,22 @@
 import Svg, { Path } from "react-native-svg";
 import { TouchableOpacity } from "react-native";
 import * as React from "react";
+import {checkLogin} from "../../logic/checkLogin";
 
 function Avatar(props) {
 
+	const isLogin = checkLogin();
+
 	return (
 		<TouchableOpacity onPress={() => {
-			props.setNavigate("profile");
-			props.router.push("/profile");
+			if(isLogin._j) {
+				console.log(isLogin)
+				props.setNavigate("profile");
+				props.router.push("/profile");
+			}
+			else {
+				props.router.push("./login");
+			}
 		}}>
 			<Svg
 				xmlns="http://www.w3.org/2000/svg"
