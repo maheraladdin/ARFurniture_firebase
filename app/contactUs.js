@@ -1,8 +1,7 @@
-import { StyleSheet, View, Text,} from "react-native";
+import { StyleSheet, View} from "react-native";
 import Back from "../myComponents/buttons/back_button_light_mode";
 import CallUs from "../myComponents/buttons/call_us_button";
 import MailUs from "../myComponents/buttons/mail_us_button";
-import { useRouter } from "expo-router";
 
 export default function contactUs() {
 	return (
