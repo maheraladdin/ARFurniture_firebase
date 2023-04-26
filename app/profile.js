@@ -1,6 +1,6 @@
 import Navigator from "../myComponents/home/navigator";
 import {useState} from "react";
-import {View, Text, Image, StyleSheet, TouchableOpacity, FlatList} from "react-native";
+import {View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, Dimensions} from "react-native";
 import EditButton from "../myComponents/buttons/edit_button";
 import TurnToDarkMode from "../myComponents/buttons/turn_to_dark_mode";
 import PhoneIcon from "../myComponents/profile/light_mode/phone_icon";
@@ -41,12 +41,13 @@ export default function profile() {
 
 	return (
 		<>
+		<ScrollView>
 			<View style={styles.container}>
 				<Image
 					source={{uri: profileData.image || "https://via.placeholder.com/200x200"}}
 					style={styles.image}
 				/>
-				<TouchableOpacity style={styles.editButton}>
+				<TouchableOpacity onPress={() => router.push("./editProfile")} style={styles.editButton}>
 					<EditButton />
 				</TouchableOpacity>
 				<Text style={styles.customerName}>
@@ -56,17 +57,16 @@ export default function profile() {
 					<TurnToDarkMode />
 				</TouchableOpacity>
 
-				<FlatList
-					data={Buttons}
-					renderItem={({item}) => item.element}
-					ItemSeparatorComponent={() => <View style={{height: 20}}/>}
-					style={styles.flatList}
-				/>
-
+				{
+					Buttons.map(item => item.element)
+				}
 			</View>
+		</ScrollView>
+		<View>
 			{/* navigator */}
 			<Navigator style={styles.navigator} setNavigate={setNavigate} navigate={navigate}/>
-		</>
+		</View>
+	</>
 	);
 }
 
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: "center",
+		marginBottom: 20,
 	},
 	image: {
 		width: 200,
@@ -92,10 +93,6 @@ const styles = StyleSheet.create({
 	modeIcon: {
 		marginVertical: 20,
 	},
-	flatList: {
-		alignSelf: "stretch",
-		marginHorizontal: 10,
-	},
 	ButtonsNavigators: {
 		borderBottomColor: 'black',
 		borderBottomWidth: 2,
@@ -104,6 +101,8 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		gap: 10,
 		fontWeight: "bold",
+		width: Dimensions.get("window").width - 20,
+		marginTop: 20,
 	}
 });
 
