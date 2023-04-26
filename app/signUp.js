@@ -2,126 +2,112 @@ import {
 	StyleSheet,
 	View,
 	Text,
+	ScrollView,
 	TextInput,
 	ImageBackground,
+	Dimensions,
+	KeyboardAvoidingView,
 } from "react-native";
 import Back from "../myComponents/buttons/back_button_light_mode";
+import {useState} from "react";
 import ConBtn from "../myComponents/buttons/continue_button";
-import { Link } from "expo-router";
 
-const image = { uri: "https://via.placeholder.com/200x100" };
+export default function Signup() {
 
-export default function signUp() {
+	// username
+	const [username, setUsername] = useState("");
+
+	// email
+	const [email, setEmail] = useState("");
+
+	// password
+	const [password, setPassword] = useState("");
+
+	// confirm password
+	const [confirmPassword, setConfirmPassword] = useState("");
+
 	return (
-		<View style={{ marginTop: 40 }}>
-			<View style={styles.login}>
-				<Link href={"./profile"}>
-					<Back />
-				</Link>
-				<Text style={{ fontSize: 20 }}>Login</Text>
-			</View>
-			<ImageBackground source={image} resizeMode="cover">
-				<Text style={styles.text}></Text>
-			</ImageBackground>
-
-			<View style={{ marginTop: 80 }}>
-				<View
-					style={{
-						alignItems: "center",
-						justifyContent: "center",
-					}}
-				>
-					<TextInput
-						style={{
-							width: 300,
-							height: 50,
-							borderRadius: 30,
-							borderColor: "#212529",
-							borderWidth: 2,
-							paddingLeft: 30,
-						}}
-						placeholder="Username"
-					></TextInput>
-				</View>
+		<KeyboardAvoidingView
+			behavior={"padding"}
+		>
+			<ScrollView>
+				<Back />
+				<ImageBackground source={{uri: "https://firebasestorage.googleapis.com/v0/b/arfurniture-2d013.appspot.com/o/backgrounds%2Fsignup.png?alt=media&token=4d83cc89-6edc-4a8d-baf9-3de851f173fd"}} style={styles.image}>
+					<Text style={styles.imageText}>AR Furniture</Text>
+				</ImageBackground>
 
 				<View
-					style={{
-						alignItems: "center",
-						justifyContent: "center",
-						marginTop: 20,
-					}}
+					style={styles.inputContainer}
+					behavior={"padding"}
 				>
 					<TextInput
-						style={{
-							width: 300,
-							height: 50,
-							borderRadius: 30,
-							borderColor: "#212529",
-							borderWidth: 2,
-							paddingLeft: 30,
-						}}
-						placeholder="Example@gmail.com"
-					></TextInput>
-				</View>
-
-				<View
-					style={{
-						alignItems: "center",
-						justifyContent: "center",
-						marginTop: 20,
-					}}
-				>
+						style={styles.input}
+						placeholder={"username"}
+						placeholderTextColor={"#CCC"}
+						onChangeText={setEmail}
+						value={email}
+					/>
 					<TextInput
-						style={{
-							width: 300,
-							height: 50,
-							borderRadius: 30,
-							borderColor: "#212529",
-							borderWidth: 2,
-							paddingLeft: 30,
-						}}
-						placeholder="Password"
-					></TextInput>
-				</View>
-
-				<View
-					style={{
-						alignItems: "center",
-						justifyContent: "center",
-						marginTop: 20,
-					}}
-				>
+						style={styles.input}
+						placeholder={"email"}
+						placeholderTextColor={"#CCC"}
+						onChangeText={setEmail}
+						value={email}
+					/>
 					<TextInput
-						style={{
-							width: 300,
-							height: 50,
-							borderRadius: 30,
-							borderColor: "#212529",
-							borderWidth: 2,
-							paddingLeft: 30,
-						}}
-						placeholder="Confirm Password"
-					></TextInput>
+						style={styles.input}
+						placeholder={"password"}
+						placeholderTextColor={"#CCC"}
+						onChangeText={setPassword}
+						value={password}
+						secureTextEntry={true}
+					/>
+					<TextInput
+						style={styles.input}
+						placeholder={"confirm password"}
+						placeholderTextColor={"#CCC"}
+						onChangeText={setPassword}
+						value={password}
+						secureTextEntry={true}
+					/>
+					<ConBtn activity={"home"}/>
 				</View>
-			</View>
 
-			<View style={{ alignItems: "center", marginTop: 60 }}>
-				<Link href={"./profile"}>
-					<ConBtn />
-				</Link>
-			</View>
-		</View>
+			</ScrollView>
+		</KeyboardAvoidingView>
 	);
 }
 
 const styles = StyleSheet.create({
-	login: {
-		margin: 20,
-		flexDirection: "row",
+	image: {
+		flex: 1,
+		resizeMode: "cover",
+		width: "100%",
+		height: 200,
+		position: "absolute",
+		justifyContent: "flex-end",
 		alignItems: "center",
-		gap: 10,
+		paddingBottom: 10,
 	},
-	text: {
-		fontSize: 100,
+	imageText: {
+		fontSize: 30,
+		color: "#518379",
 	},
+	input : {
+		width: Dimensions.get("window").width - 20,
+		height: 50,
+		borderStyle: "solid",
+		borderWidth: 1,
+		borderRadius: 25,
+		padding: 25,
+		fontSize: 15,
+	},
+	inputContainer : {
+		paddingVertical: 20,
+		marginTop: 200,
+		flex: 1,
+		alignItems: "center",
+		gap: 30,
+		marginBottom: 20,
+	}
 });

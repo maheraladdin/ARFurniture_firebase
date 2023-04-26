@@ -19,10 +19,10 @@ import {useRouter} from "expo-router";
 
 export default function login() {
 
-	// username
+	// email
 	const [email, setEmail] = useState("");
 
-	// email
+	// password
 	const [password, setPassword] = useState("");
 
 	const router = useRouter();
@@ -46,14 +46,12 @@ export default function login() {
 						placeholder={"email"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setEmail}
-						value={email}
 					/>
 					<TextInput
 						style={styles.input}
 						placeholder={"password"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setPassword}
-						value={password}
 						secureTextEntry={true}
 					/>
 					<TouchableOpacity>
