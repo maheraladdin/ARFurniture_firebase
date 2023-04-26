@@ -19,10 +19,15 @@ function BackButton(props) {
 				<Path
 					d="M247.8 182.532L234 168.766 247.8 155l2.55 2.583-11.183 11.183 11.183 11.183z"
 					transform="translate(-234 -155)"
-					fill="#212529"
+					fill={props.color || "#212529"}
 				/>
 			</Svg>
-			<Text style={styles.text}>{props.activity || "back"}</Text>
+			<Text style={{
+				...styles.text,
+				color: props.color || "#212529"
+			}}>
+				{props.activity || "back"}
+			</Text>
 		</TouchableOpacity>
 	);
 }

@@ -31,7 +31,7 @@ export default function Signup() {
 			behavior={"padding"}
 		>
 			<ScrollView>
-				<Back />
+				<Back activity={"Login"}/>
 				<ImageBackground source={{uri: "https://firebasestorage.googleapis.com/v0/b/arfurniture-2d013.appspot.com/o/backgrounds%2Fsignup.png?alt=media&token=4d83cc89-6edc-4a8d-baf9-3de851f173fd"}} style={styles.image}>
 					<Text style={styles.imageText}>AR Furniture</Text>
 				</ImageBackground>
