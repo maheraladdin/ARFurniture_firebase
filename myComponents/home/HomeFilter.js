@@ -16,18 +16,21 @@ export default function HomeFilter({setDATA}) {
     const [data, setData] = useState([]);
 
     // get all products
-    const getAllProducts = async () => {
+    const getAllProducts = () => {
         // fetch products from firebase database
         // create a reference to the products collection
-        const productsCol = await collection(db,"products");
-        // get all documents from products collection
-        const productsSnapshot = await getDocs(productsCol);
-        // get all documents data
-        const productsList = productsSnapshot.docs.map(doc => doc.data());
-        // set products
-        setDATA(productsList);
-        // set filters
-        setFilters("all")
+        (async () => {
+                const productsCol = await collection(db, "products");
+                // get all documents from products collection
+                const productsSnapshot = await getDocs(productsCol);
+                // get all documents data
+                const productsList = productsSnapshot.docs.map(doc => doc.data());
+                // set products
+                setDATA(productsList);
+                // set filters
+                setFilters("all")
+            }
+        )();
     }
 
     // query products based on category

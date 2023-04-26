@@ -8,6 +8,7 @@ import PrivacyPolicyIcon from "../myComponents/profile/light_mode/privacy_policy
 import TermsAndConditions from "../myComponents/profile/light_mode/Terms_and_Conditions";
 import Logout from "../myComponents/profile/light_mode/logout";
 import {useRouter} from "expo-router";
+import { signOutUser } from "../logic/firebaseQueries/signOutUser";
 
 export default function profile() {
 	const [navigate, setNavigate] = useState("profile");
@@ -15,9 +16,13 @@ export default function profile() {
 
 	const router = useRouter();
 
-	const generateButton = (icon, text,activity) => {
+	const generateButton = (icon, text,activity,callback) => {
+		const buttonHandler = async () => {
+			callback ? await callback() : null;
+			router.push(activity);
+		}
 		return (
-			<TouchableOpacity onPress={activity ? ()=> router.push(activity) : null} style={styles.ButtonsNavigators}>
+			<TouchableOpacity onPress={activity ? buttonHandler : null} style={styles.ButtonsNavigators}>
 				{icon}
 				<Text>{text}</Text>
 			</TouchableOpacity>
@@ -35,7 +40,7 @@ export default function profile() {
 			element: generateButton(<TermsAndConditions />, "Terms & Conditions", "termsAndConditions"),
 		},
 		{
-			element: generateButton(<Logout />, "logout", "home"),
+			element: generateButton(<Logout />, "logout", "home",signOutUser),
 		}
 		];
 

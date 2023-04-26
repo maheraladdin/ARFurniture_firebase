@@ -16,6 +16,7 @@ import LoginFace from "../myComponents/buttons/login_with_facebook_button";
 import LoginGoogle from "../myComponents/buttons/login_with_google";
 import SignUp from "../myComponents/buttons/sign_up_button";
 import {useRouter} from "expo-router";
+import {signInUser} from "../logic/firebaseQueries/signInUser";
 
 export default function login() {
 
@@ -60,7 +61,7 @@ export default function login() {
 					<TouchableOpacity>
 						<LoginGoogle />
 					</TouchableOpacity>
-					<ConBtn activity={"home"}/>
+					<ConBtn callback={signInUser} activity={"home"}/>
 					<TouchableOpacity onPress={() => router.push("signUp")}>
 						<SignUp />
 					</TouchableOpacity>

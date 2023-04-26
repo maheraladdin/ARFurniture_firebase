@@ -6,8 +6,14 @@ import { useRouter } from "expo-router";
 function ConBtn(props) {
 	// router to navigate between activities
 	const router = useRouter();
+
+	const continueBtnHandler = async () => {
+		props.callback ? await props.callback() : null;
+		router.push(props.activity);
+	}
+
 	return (
-		<TouchableOpacity onPress={() => router.push(props.activity)}>
+		<TouchableOpacity onPress={continueBtnHandler}>
 			<Svg
 				xmlns="http://www.w3.org/2000/svg"
 				width={295}
