@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
 		Position: "absolute",
 		top: 20,
 		left: 10,
+		zIndex: 1000,
 	},
 	text: {
 		fontSize: 20,

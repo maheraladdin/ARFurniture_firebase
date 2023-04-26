@@ -4,7 +4,8 @@ import {
 	Text,
 	ScrollView,
 	TextInput,
-	ImageBackground
+	ImageBackground,
+	Dimensions
 } from "react-native";
 import Back from "../myComponents/buttons/back_button_light_mode";
 import ConBtn from "../myComponents/buttons/continue_button";
@@ -19,7 +20,7 @@ export default function login() {
 		<ScrollView>
 			<Back />
 			<ImageBackground source={image} style={styles.image}>
-				<Text>AR Furniture</Text>
+				<Text style={styles.imageText}>AR Furniture</Text>
 			</ImageBackground>
 
 		</ScrollView>
@@ -30,5 +31,14 @@ const styles = StyleSheet.create({
 	image: {
 		flex: 1,
 		resizeMode: "cover",
+		width: "100%",
+		height: 200,
+		position: "absolute",
+		justifyContent: "flex-end",
+		alignItems: "center",
+		paddingBottom: 10,
+	},
+	imageText: {
+		fontSize: 30,
 	}
 });
