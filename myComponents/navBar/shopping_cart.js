@@ -1,8 +1,13 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
+import {TouchableOpacity} from "react-native";
 
-function SvgComponent(props) {
+function ShoppingCart(props) {
 	return (
+		<TouchableOpacity onPress={() => {
+			props.setNavigate("cart");
+			props.router.push("/cart");
+		}}>
 		<Svg
 			xmlns="http://www.w3.org/2000/svg"
 			width={26}
@@ -16,7 +21,8 @@ function SvgComponent(props) {
 				fill="#f8f9fa"
 			/>
 		</Svg>
+		</TouchableOpacity>
 	);
 }
 
-export default SvgComponent;
+export default ShoppingCart;
