@@ -1,23 +1,12 @@
 import Product from "./product";
-import {FlatList, TouchableOpacity} from "react-native";
-import {useRouter} from "expo-router";
+import {FlatList} from "react-native";
 
 export default function Products({DATA}) {
-
-    const router = useRouter();
-
-
 
     return (
         <FlatList
             data={DATA}
-            renderItem={({ item }) =>
-                (
-                    <TouchableOpacity onPress={() => router.push("productDetails")}>
-                        <Product image={item.imageURI} title={item.productName} price={item.productPrice} />
-                    </TouchableOpacity>
-                )
-        }
+            renderItem={({ item }) => <Product image={item.imageURI} title={item.productName} price={item.productPrice} />}
             numColumns={2}
         />
     )
