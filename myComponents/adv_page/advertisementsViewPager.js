@@ -70,7 +70,7 @@ export default function AdvertisementsViewPager() {
                             <View style={{
                                 width: 30,
                                 height: 30,
-                                borderRadius: "50%",
+                                borderRadius: 15,
                                 backgroundColor: index === pageNumber ? "#518379" : "#E0E0E0"
                             }}>
                             </View>
