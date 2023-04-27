@@ -3,7 +3,7 @@ import Svg, { Path } from "react-native-svg";
 import {TouchableOpacity} from "react-native";
 import {useState} from "react";
 import {DialogLogin} from "../DialogLogin";
-import {isLogin} from "../../logic/isLogin";
+import {isLogin} from "../../data/isLogin";
 function ShoppingCart(props) {
 	const [visible,setVisible] = useState(false);
 	return (

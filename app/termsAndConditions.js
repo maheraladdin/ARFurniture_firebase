@@ -1,6 +1,7 @@
 import {StyleSheet, View, Text, TextInput,Dimensions} from "react-native";
 import ConBtn from "../myComponents/buttons/continue_button";
 import TermsAndConditions from "../myComponents/profile/light_mode/Terms_and_Conditions";
+import {lorem} from "../data/lorem";
 
 export default function termsAndConditions() {
 	return (
@@ -11,7 +12,7 @@ export default function termsAndConditions() {
 			</View>
 			<TextInput
 				style={styles.input}
-				value={"Our awesome Terms and Conditions"}
+				value={lorem}
 				multiline={true}
 				editable={false}
 			/>

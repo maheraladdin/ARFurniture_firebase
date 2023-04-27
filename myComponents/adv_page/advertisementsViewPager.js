@@ -22,6 +22,7 @@ export default function AdvertisementsViewPager() {
         pagerRef.current.setPage(pageNumber);
     };
 
+
     useEffect(async () => {
         // fetch advertisement from firebase database
         // create a reference to the advertisements collection

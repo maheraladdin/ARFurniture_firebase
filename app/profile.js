@@ -9,10 +9,11 @@ import TermsAndConditions from "../myComponents/profile/light_mode/Terms_and_Con
 import Logout from "../myComponents/profile/light_mode/logout";
 import {useRouter} from "expo-router";
 import { signOutUser } from "../logic/firebaseQueries/signOutUser";
+import { isLogin } from "../data/isLogin";
 
 export default function profile() {
 	const [navigate, setNavigate] = useState("profile");
-	const [profileData, setProfileData] = useState([]);
+	const [profileData, setProfileData] = useState(isLogin.userData);
 
 	const router = useRouter();
 
@@ -56,7 +57,7 @@ export default function profile() {
 					<EditButton />
 				</TouchableOpacity>
 				<Text style={styles.customerName}>
-					{profileData.name || "Customer Name"}
+					{profileData.username || "Customer Name"}
 				</Text>
 				<TouchableOpacity style={styles.modeIcon}>
 					<TurnToDarkMode />

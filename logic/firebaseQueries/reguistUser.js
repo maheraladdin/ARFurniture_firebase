@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';
 import { db } from '../../firebaseConfig';
 import {doc,setDoc} from "firebase/firestore";
-import {isLogin} from "../isLogin";
+import {isLogin} from "../../data/isLogin";
 // register user
 const registerUser = (username,email, password) => {
     try {
@@ -12,7 +12,6 @@ const registerUser = (username,email, password) => {
 
                     // Signed in
                     const user = userCredential.user;
-                    console.log(user);
 
                     // user data
                     const userData = {
@@ -33,6 +32,7 @@ const registerUser = (username,email, password) => {
                     // you are now logged in
                     isLogin.changeState = true;
                     isLogin.changeUid = user.uid;
+                    isLogin.changeUserData = userData;
                 })
                 .catch((error) => {
                     console.log("any error happen while sign up",error);

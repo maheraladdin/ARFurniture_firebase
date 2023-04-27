@@ -3,7 +3,7 @@ import Svg, { Path } from "react-native-svg";
 import {TouchableOpacity} from "react-native";
 import {DialogLogin} from "../DialogLogin";
 import {useState} from "react";
-import {isLogin} from "../../logic/isLogin";
+import {isLogin} from "../../data/isLogin";
 
 
 function WhiteHeart(props) {

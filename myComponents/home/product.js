@@ -6,7 +6,7 @@ import { useState } from "react";
 import {DialogLogin} from "../DialogLogin";
 import AddedCart from "../buttons/addedCart";
 import * as React from "react";
-import {isLogin} from "../../logic/isLogin";
+import {isLogin} from "../../data/isLogin";
 
 export default function Product({heartState,title,price,image}) {
 

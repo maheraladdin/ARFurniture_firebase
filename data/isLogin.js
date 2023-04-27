@@ -6,5 +6,9 @@ export const isLogin = {
     uid: "",
     set changeUid(uid) {
         this.uid = uid;
+    },
+    userData: {},
+    set changeUserData(userData) {
+        this.userData = userData;
     }
 };

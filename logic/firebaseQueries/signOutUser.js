@@ -1,6 +1,6 @@
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';
-import {isLogin} from "../isLogin";
+import {isLogin} from "../../data/isLogin";
 // sign out user
 export const signOutUser = async () => {
     signOut(auth).then(() => {

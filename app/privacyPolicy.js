@@ -1,8 +1,12 @@
-import {StyleSheet, View, Text, TextInput,Dimensions} from "react-native";
+import {StyleSheet, View, Text, TextInput, Dimensions} from "react-native";
 import Privacy from "../myComponents/profile/light_mode/privacy_policy_icon";
 import ConBtn from "../myComponents/buttons/continue_button";
+import {lorem} from "../data/lorem";
 
 export default function privacy() {
+
+	// return window dimensions
+
 	return (
 		<View style={styles.container}>
 				<View style={styles.row}>
@@ -11,7 +15,7 @@ export default function privacy() {
 				</View>
 				<TextInput
 					style={styles.input}
-					value={"Our awesome privacy policy"}
+					value={lorem}
 					multiline={true}
 					editable={false}
 				/>
@@ -32,6 +36,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 		margin: 20,
+		justifyContent: "space-between",
 	},
 	input : {
 		borderWidth: 1,
