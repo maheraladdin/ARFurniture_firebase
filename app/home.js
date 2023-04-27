@@ -21,7 +21,7 @@ export default function Home() {
 
 
 			{/* products */}
-			<Products DATA={DATA}/>
+			<Products DATA={DATA} />
 
 			{/* navigator */}
 			<Navigator setNavigate={setNavigate} navigate={navigate}/>

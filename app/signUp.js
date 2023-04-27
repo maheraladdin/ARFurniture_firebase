@@ -27,9 +27,7 @@ export default function Signup() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 
 	return (
-		<KeyboardAvoidingView
-			behavior={"padding"}
-		>
+		<KeyboardAvoidingView behavior={"padding"} >
 			<ScrollView>
 				<Back activity={"Login"}/>
 				<ImageBackground source={{uri: "https://firebasestorage.googleapis.com/v0/b/arfurniture-2d013.appspot.com/o/backgrounds%2Fsignup.png?alt=media&token=4d83cc89-6edc-4a8d-baf9-3de851f173fd"}} style={styles.image}>
