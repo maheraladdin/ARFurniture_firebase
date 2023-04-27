@@ -11,7 +11,6 @@ import {
 import Back from "../myComponents/buttons/back_button_light_mode";
 import {useState} from "react";
 import ConBtn from "../myComponents/buttons/continue_button";
-import registerUser from "../logic/firebaseQueries/reguistUser";
 
 export default function Signup() {
 
@@ -26,12 +25,6 @@ export default function Signup() {
 
 	// confirm password
 	const [confirmPassword, setConfirmPassword] = useState("");
-
-	// register user
-	const register = () => {
-		if(password !== confirmPassword)
-			registerUser(username,email,password);
-	}
 
 	return (
 		<KeyboardAvoidingView
@@ -52,28 +45,32 @@ export default function Signup() {
 						placeholder={"username"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setEmail}
+						value={email}
 					/>
 					<TextInput
 						style={styles.input}
 						placeholder={"email"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setEmail}
+						value={email}
 					/>
 					<TextInput
 						style={styles.input}
 						placeholder={"password"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setPassword}
+						value={password}
 						secureTextEntry={true}
 					/>
 					<TextInput
 						style={styles.input}
 						placeholder={"confirm password"}
 						placeholderTextColor={"#CCC"}
-						onChangeText={setConfirmPassword}
+						onChangeText={setPassword}
+						value={password}
 						secureTextEntry={true}
 					/>
-					<ConBtn callback={register} activity={"home"}/>
+					<ConBtn activity={"home"}/>
 				</View>
 
 			</ScrollView>
@@ -104,7 +101,6 @@ const styles = StyleSheet.create({
 		borderRadius: 25,
 		padding: 25,
 		fontSize: 15,
-		overflow: "hidden",
 	},
 	inputContainer : {
 		paddingVertical: 20,
