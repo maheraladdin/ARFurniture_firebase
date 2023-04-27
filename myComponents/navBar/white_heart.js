@@ -1,17 +1,16 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 import {TouchableOpacity} from "react-native";
-import {checkLogin} from "../../logic/checkLogin";
 import {DialogLogin} from "../DialogLogin";
 import {useState} from "react";
+import {isLogin} from "../../logic/isLogin";
+
 
 function WhiteHeart(props) {
 	const [visible,setVisible] = useState(false);
-	const isLogin = checkLogin();
 	return (
 		<TouchableOpacity onPress={() => {
-			if(isLogin._j) {
-				console.log(isLogin)
+			if(isLogin.state) {
 				props.setNavigate("wishList");
 				props.router.push("/wishList");
 			}

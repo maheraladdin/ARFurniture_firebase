@@ -1,9 +1,8 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';
 import { db } from '../../firebaseConfig';
-import {collection,setDoc} from "firebase/firestore";
-import { setItemAsync } from "expo-secure-store";
-
+import {doc,setDoc} from "firebase/firestore";
+import {isLogin} from "../isLogin";
 // register user
 const registerUser = (username,email, password) => {
     try {
@@ -25,31 +24,18 @@ const registerUser = (username,email, password) => {
                         lastLoginAt: new Date().toString(),
                     }
 
+                    // create a document
+                    const userDoc = doc(db, `users`, user.uid);
+
                     // save user data to firestore database
-                    // create a reference to the users collection
-                    const userCollection = collection(db, `users`);
-                    // add user data to users collection
-                    setDoc(userCollection, userData).then(() => {
-                        console.log("user data added to firestore database");
-                    }).catch((error) => {
-                        console.log(error);
-                    });
+                    setDoc(userDoc,userData);
 
-                    // save user data to secure storage
-                    setItemAsync("userData", JSON.stringify(userData)).catch((error) => {
-                        console.log(error);
-                    });
-
-                    // save a token to secure storage
-                    user.getIdToken(true).then((token) => {
-                        setItemAsync("@token", token);
-                    }).catch((error) => {
-                        console.log(error);
-                    });
-
+                    // you are now logged in
+                    isLogin.changeState = true;
+                    isLogin.changeUid = user.uid;
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.log("any error happen while sign up",error);
                 })
         })();
         } catch (error) {

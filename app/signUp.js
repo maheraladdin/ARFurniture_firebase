@@ -11,6 +11,9 @@ import {
 import Back from "../myComponents/buttons/back_button_light_mode";
 import {useState} from "react";
 import ConBtn from "../myComponents/buttons/continue_button";
+import registerUser from "../logic/firebaseQueries/reguistUser";
+import {passwordValidator} from "../logic/validator/passwordValidator";
+import {emailValidator} from "../logic/validator/emailValidator";
 
 export default function Signup() {
 
@@ -20,11 +23,47 @@ export default function Signup() {
 	// email
 	const [email, setEmail] = useState("");
 
+	// email invalid
+	const [emailInvalid, setEmailInvalid] = useState(true);
+
 	// password
 	const [password, setPassword] = useState("");
 
+	// password invalid
+	const [passwordInvalid, setPasswordInvalid] = useState(true);
+
 	// confirm password
 	const [confirmPassword, setConfirmPassword] = useState("");
+
+	// confirm password invalid
+	const [confirmPasswordInvalid, setConfirmPasswordInvalid] = useState(true);
+
+	// activity
+	const [activity, setActivity] = useState(null);
+
+	// borderColorValidation
+	const [borderColorValidation, setBorderColorValidation] = useState("#CCC");
+
+	// register user
+	const register = () => {
+		// validate email
+		if(emailValidator(email)) {
+			setEmailInvalid(false);
+		}
+		if(passwordValidator(password)) {
+			setPasswordInvalid(false);
+		}
+		if(password !== confirmPassword) {
+			setConfirmPasswordInvalid(false);
+		}
+		if(emailInvalid && passwordInvalid && confirmPasswordInvalid) {
+			setActivity("home");
+			registerUser(username, email, password);
+		} else {
+			setBorderColorValidation("red");
+		}
+	}
+
 
 	return (
 		<KeyboardAvoidingView behavior={"padding"} >
@@ -39,32 +78,44 @@ export default function Signup() {
 					behavior={"padding"}
 				>
 					<TextInput
-						style={styles.input}
+						style={{
+							...styles.input,
+							borderColor: borderColorValidation,
+						}}
 						placeholder={"username"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setUsername}
 					/>
 					<TextInput
-						style={styles.input}
+						style={{
+							...styles.input,
+							borderColor: borderColorValidation,
+						}}
 						placeholder={"email"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setEmail}
 					/>
 					<TextInput
-						style={styles.input}
+						style={{
+							...styles.input,
+							borderColor: borderColorValidation,
+						}}
 						placeholder={"password"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setPassword}
 						secureTextEntry={true}
 					/>
 					<TextInput
-						style={styles.input}
+						style={{
+							...styles.input,
+							borderColor: borderColorValidation,
+						}}
 						placeholder={"confirm password"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setConfirmPassword}
 						secureTextEntry={true}
 					/>
-					<ConBtn activity={"home"}/>
+					<ConBtn callback={register} activity={activity}/>
 				</View>
 
 			</ScrollView>
@@ -93,7 +144,7 @@ const styles = StyleSheet.create({
 		borderStyle: "solid",
 		borderWidth: 1,
 		borderRadius: 25,
-		padding: 25,
+		paddingHorizontal: 25,
 		fontSize: 15,
 	},
 	inputContainer : {

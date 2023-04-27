@@ -9,7 +9,7 @@ function ConBtn(props) {
 
 	const continueBtnHandler = async () => {
 		props.callback ? await props.callback() : null;
-		router.push(props.activity);
+		props.activity ? router.push(props.activity): null;
 	}
 
 	return (

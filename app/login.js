@@ -17,16 +17,39 @@ import LoginGoogle from "../myComponents/buttons/login_with_google";
 import SignUp from "../myComponents/buttons/sign_up_button";
 import {useRouter} from "expo-router";
 import {signInUser} from "../logic/firebaseQueries/signInUser";
+import {passwordValidator} from "../logic/validator/passwordValidator";
+import {emailValidator} from "../logic/validator/emailValidator";
 
 export default function login() {
 
 	// email
 	const [email, setEmail] = useState("");
 
+	// email invalid
+	const [emailInvalid, setEmailInvalid] = useState(true);
+
 	// password
 	const [password, setPassword] = useState("");
 
+	// password invalid
+	const [passwordInvalid, setPasswordInvalid] = useState(true);
+
 	const router = useRouter();
+
+	// login
+	const login = () => {
+
+		// validate email
+		if(emailValidator(email))
+			setEmailInvalid(false);
+
+		// validate password
+		if(passwordValidator(password))
+			setPasswordInvalid(false);
+
+		if(emailInvalid && passwordInvalid)
+			signInUser(email, password);
+	}
 
 	return (
 		<KeyboardAvoidingView
@@ -61,7 +84,7 @@ export default function login() {
 					<TouchableOpacity>
 						<LoginGoogle />
 					</TouchableOpacity>
-					<ConBtn callback={signInUser} activity={"home"}/>
+					<ConBtn callback={login} activity={"home"}/>
 					<TouchableOpacity onPress={() => router.push("signUp")}>
 						<SignUp />
 					</TouchableOpacity>
@@ -93,7 +116,7 @@ const styles = StyleSheet.create({
 		borderStyle: "solid",
 		borderWidth: 1,
 		borderRadius: 25,
-		padding: 25,
+		paddingLeft: 25,
 		fontSize: 15,
 	},
 	inputContainer : {
