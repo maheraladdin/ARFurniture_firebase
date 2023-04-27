@@ -42,30 +42,26 @@ export default function Signup() {
 						style={styles.input}
 						placeholder={"username"}
 						placeholderTextColor={"#CCC"}
-						onChangeText={setEmail}
-						value={email}
+						onChangeText={setUsername}
 					/>
 					<TextInput
 						style={styles.input}
 						placeholder={"email"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setEmail}
-						value={email}
 					/>
 					<TextInput
 						style={styles.input}
 						placeholder={"password"}
 						placeholderTextColor={"#CCC"}
 						onChangeText={setPassword}
-						value={password}
 						secureTextEntry={true}
 					/>
 					<TextInput
 						style={styles.input}
 						placeholder={"confirm password"}
 						placeholderTextColor={"#CCC"}
-						onChangeText={setPassword}
-						value={password}
+						onChangeText={setConfirmPassword}
 						secureTextEntry={true}
 					/>
 					<ConBtn activity={"home"}/>

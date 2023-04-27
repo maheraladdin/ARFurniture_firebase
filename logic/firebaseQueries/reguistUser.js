@@ -41,7 +41,7 @@ const registerUser = (username,email, password) => {
                     });
 
                     // save a token to secure storage
-                    user.getIdToken().then((token) => {
+                    user.getIdToken(true).then((token) => {
                         setItemAsync("@token", token);
                     }).catch((error) => {
                         console.log(error);
