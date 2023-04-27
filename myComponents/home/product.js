@@ -82,12 +82,10 @@ const styles = StyleSheet.create({
 	},
 	productTitle: {
 		fontWeight: "bold",
-		color: "#fff",
 		marginBottom: 10,
 	},
 	productPrice: {
 		fontSize: 20,
 		fontWeight: "bold",
-		color: "#fff",
 	}
 });
