@@ -1,8 +1,7 @@
 import PagerView from "react-native-pager-view";
 import {Dimensions,StyleSheet, Image, TouchableOpacity, View} from "react-native";
 import {useEffect, useRef, useState} from "react";
-import {db} from "../../firebaseConfig";
-import {collection,getDocs} from "firebase/firestore";
+import getAdvertisements from "../../logic/firebaseQueries/getAdvertisements";
 
 
 export default function AdvertisementsViewPager() {
@@ -23,16 +22,8 @@ export default function AdvertisementsViewPager() {
     };
 
 
-    useEffect(async () => {
-        // fetch advertisement from firebase database
-        // create a reference to the advertisements collection
-        const advertisementsCol = await collection(db,"advertisements");
-        // get all documents from advertisements collection
-        const advertisementsSnapshot = await getDocs(advertisementsCol);
-        // get all documents data
-        const advertisementsList = advertisementsSnapshot.docs.map(doc => doc.data());
-        // set advertisements
-        setAdvertisements(advertisementsList);
+    useEffect(() => {
+        getAdvertisements().then(advertisements => setAdvertisements(advertisements)).catch(err => console.log(err));
     },[]);
 
     return (
