@@ -19,13 +19,9 @@ export default function HomeFilter({setDATA}) {
 
     useEffect(() => {
         setData(initiateFilter(filters,queryProductsBasedOnCategory));
-
     }, [filters]);
 
     useEffect(() => queryProductsBasedOnCategory("all"), []);
-
-
-
 
     return (
         <FlatList

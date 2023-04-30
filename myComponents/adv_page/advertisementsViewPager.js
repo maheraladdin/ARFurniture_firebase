@@ -23,7 +23,9 @@ export default function AdvertisementsViewPager() {
 
 
     useEffect(() => {
-        getAdvertisements().then(advertisements => setAdvertisements(advertisements)).catch(err => console.log(err));
+        getAdvertisements()
+            .then(advertisements => setAdvertisements(advertisements))
+            .catch(err => console.log(err));
     },[]);
 
     return (

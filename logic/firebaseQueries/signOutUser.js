@@ -7,6 +7,7 @@ export const signOutUser = async () => {
         // you are now logged in
         isLogin.changeState = false;
         isLogin.changeUid = "";
+        isLogin.changeUserData = {};
     }).catch((error) => {
         console.log(error);
     });
