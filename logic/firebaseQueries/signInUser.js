@@ -1,8 +1,8 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
+import {auth, db} from '../../firebaseConfig';
 import {isLogin} from "../../data/isLogin";
 import {usersCol} from "../../firebaseConfig";
-import {getDocs, query, where} from "firebase/firestore";
+import {doc, getDocs, query, updateDoc, where} from "firebase/firestore";
 // sign in user
 export const signInUser = (email, password) => {
     signInWithEmailAndPassword(auth,email, password)
@@ -21,6 +21,13 @@ export const signInUser = (email, password) => {
 
             // get user data
             isLogin.changeUserData = await userSnapshot.docs.map(doc => doc.data())[0];
+
+            // update last login
+            const userDoc = await doc(db, `users`, user.uid);
+
+            await updateDoc(userDoc, {
+                lastLoginAt: new Date().toString()
+            });
 
         })
         .catch((error) => {
