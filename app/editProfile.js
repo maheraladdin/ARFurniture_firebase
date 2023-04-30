@@ -4,10 +4,16 @@ import Back from "../myComponents/buttons/back_button_light_mode";
 import Confirm from "../myComponents/buttons/confirm_button";
 import {useRouter} from "expo-router";
 import {useState} from "react";
+import * as ImagePicker from "expo-image-picker";
+import updateUser from "../logic/firebaseQueries/updateUser";
+import {isLogin} from "../data/isLogin";
 
 export default function editProfile() {
 
 	const router = useRouter();
+
+	// image
+	const [image, setImage] = useState(isLogin.userData.image || "");
 
 	// username
 	const [username, setUsername] = useState("");
@@ -15,12 +21,25 @@ export default function editProfile() {
 	// email
 	const [email, setEmail] = useState("");
 
-	// phone number
-	const [phoneNumber, setPhoneNumber] = useState("");
-
-	const confirmHandler = () => {
-		router.push("./profile");
+	const confirmHandler = async () => {
+		// update user data
+		await updateUser({username, email, image});
+		// go to profile page
+		router.push("./home");
 	}
+
+	const pickImage = async () => {
+		// No permissions request is necessary for launching the image library
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			base64: true,
+		});
+
+		// if use didn't cancel the image picker
+		if (!result.canceled) {
+			setImage(`data:image/jpeg;base64,${result.assets[0].base64}`);
+		}
+	};
 
 	return (
 		<KeyboardAvoidingView
@@ -30,10 +49,10 @@ export default function editProfile() {
 				<Back activity={"Profile"}/>
 				<View style={styles.container}>
 					<Image
-						source={{uri: "https://via.placeholder.com/200x200"}}
+						source={{uri: image || "https://via.placeholder.com/200x200"}}
 						style={styles.image}
 					/>
-					<TouchableOpacity style={styles.ChangePhoto}>
+					<TouchableOpacity onPress={pickImage} style={styles.ChangePhoto}>
 						<ChangePhoto />
 					</TouchableOpacity>
 
@@ -49,12 +68,6 @@ export default function editProfile() {
 							placeholder={"Email"}
 							placeholderTextColor={"#CCC"}
 							onChangeText={setEmail}
-						/>
-						<TextInput
-							style={styles.input}
-							placeholder={"Phone number"}
-							placeholderTextColor={"#CCC"}
-							onChangeText={setPhoneNumber}
 						/>
 					</View>
 
@@ -92,7 +105,7 @@ const styles = StyleSheet.create({
 		borderStyle: "solid",
 		borderWidth: 1,
 		borderRadius: 25,
-		padding: 25,
+		paddingLeft: 25,
 		marginBottom: 25,
 	},
 	inputContainer : {

@@ -18,6 +18,7 @@ const registerUser = (username,email, password) => {
                         id: user.uid,
                         username,
                         email,
+                        image: "",
                         cart: [],
                         wishList: [],
                         lastLoginAt: new Date().toString(),

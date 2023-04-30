@@ -13,7 +13,6 @@ import { isLogin } from "../data/isLogin";
 
 export default function profile() {
 	const [navigate, setNavigate] = useState("profile");
-	const [profileData, setProfileData] = useState(isLogin.userData);
 
 	const router = useRouter();
 
@@ -50,14 +49,14 @@ export default function profile() {
 		<ScrollView>
 			<View style={styles.container}>
 				<Image
-					source={{uri: profileData.image || "https://via.placeholder.com/200x200"}}
+					source={{uri: isLogin.userData.image || "https://via.placeholder.com/200x200"}}
 					style={styles.image}
 				/>
 				<TouchableOpacity onPress={() => router.push("./editProfile")} style={styles.editButton}>
 					<EditButton />
 				</TouchableOpacity>
 				<Text style={styles.customerName}>
-					{profileData.username || "Customer Name"}
+					{isLogin.userData.username || "Customer Name"}
 				</Text>
 				<TouchableOpacity style={styles.modeIcon}>
 					<TurnToDarkMode />
@@ -95,6 +94,7 @@ const styles = StyleSheet.create({
 	customerName: {
 		fontSize: 30,
 		marginTop: 40,
+		textAlign: "center",
 	},
 	modeIcon: {
 		marginVertical: 20,

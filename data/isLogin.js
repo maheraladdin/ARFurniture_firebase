@@ -10,5 +10,13 @@ export const isLogin = {
     userData: {},
     set changeUserData(userData) {
         this.userData = userData;
+    },
+    set updateProfile(userData) {
+        this.userData.email = userData.email;
+        this.userData.username = userData.username;
+        this.userData.image = userData.image;
+    },
+    get wishList() {
+        return this.userData.wishList;
     }
 };
