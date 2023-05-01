@@ -12,7 +12,7 @@ export default function WishList() {
 	useEffect(() => {
 		getWishList(setDATA)
 			.then(wishList => {
-				setDATA(wishList)
+				setDATA(wishList);
 			})
 			.catch(err => console.log(err));
 	}, [DATA]);

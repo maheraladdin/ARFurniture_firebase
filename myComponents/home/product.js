@@ -10,9 +10,13 @@ import {isLogin} from "../../data/isLogin";
 
 export default function Product({productId,title,price,image}) {
 
-	const [filled, setFilled] = useState(isLogin.state && isLogin.userData.wishList && isLogin.userData.wishList.includes(productId));
+	// filled heart
+	const [filled, setFilled] = useState(isLogin.state && isLogin.wishList && isLogin.wishList.includes(productId));
+
+	// added to cart
 	const [added, setAdded] = useState(false);
 
+	// dialog
 	const [visible,setVisible] = useState(false);
 
 	return (
@@ -26,9 +30,9 @@ export default function Product({productId,title,price,image}) {
 
 			{/* Heart */}
 			<View style={styles.redHeart}>
-				<TouchableOpacity onPress={async () => {
+				<TouchableOpacity onPress={() => {
 					if(isLogin.state) {
-						filled ? await isLogin.removeWishList(productId) : await isLogin.addWishList(productId);
+						filled ? isLogin.removeWishList(productId) : isLogin.addWishList(productId);
 						setFilled(!filled);
 					}
 					else {

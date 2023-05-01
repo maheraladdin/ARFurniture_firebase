@@ -1,4 +1,4 @@
-import updateWishList from "../logic/firebaseQueries/addToWishList";
+import updateWishList from "../logic/firebaseQueries/updateWishList";
 export const isLogin = {
     set changeState(state) {
         this.state = state;
@@ -18,14 +18,16 @@ export const isLogin = {
         this.userData.image = userData.image;
     },
     async addWishList(productId) {
-        this.userData.wishList.push(productId);
-        await updateWishList(this.uid, [... new Set(this.userData.wishList)]);
+        this.wishList.push(productId);
+        await updateWishList(this.uid, this.wishList);
         console.log(this.userData.wishList);
     },
     async removeWishList(productId) {
-        this.userData.wishList.filter(id => id !== productId);
-        await updateWishList(this.uid, [... new Set(this.userData.wishList)]);
+        this.wishList.filter(id => id !== productId);
+        await updateWishList(this.uid, this.wishList);
         console.log(this.userData.wishList);
+    },
+    get wishList() {
+        return [...new Set(this.userData.wishList)];
     }
-
 };
