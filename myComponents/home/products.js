@@ -6,7 +6,7 @@ export default function Products({DATA}) {
     return (
         <FlatList
             data={DATA}
-            renderItem={({ item }) => <Product image={item.imageURI} title={item.productName} price={item.productPrice} />}
+            renderItem={({ item }) => <Product productId={item._id} image={item.imageURI} title={item.productName} price={item.productPrice} />}
             numColumns={2}
         />
     )

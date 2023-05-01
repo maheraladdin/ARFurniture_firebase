@@ -8,9 +8,9 @@ import AddedCart from "../buttons/addedCart";
 import * as React from "react";
 import {isLogin} from "../../data/isLogin";
 
-export default function Product({heartState,title,price,image}) {
+export default function Product({productId,title,price,image}) {
 
-	const [filled, setFilled] = useState(heartState);
+	const [filled, setFilled] = useState(isLogin.state && isLogin.userData.wishList && isLogin.userData.wishList.includes(productId));
 	const [added, setAdded] = useState(false);
 
 	const [visible,setVisible] = useState(false);
@@ -26,8 +26,9 @@ export default function Product({heartState,title,price,image}) {
 
 			{/* Heart */}
 			<View style={styles.redHeart}>
-				<TouchableOpacity onPress={() => {
+				<TouchableOpacity onPress={async () => {
 					if(isLogin.state) {
+						filled ? await isLogin.removeWishList(productId) : await isLogin.addWishList(productId);
 						setFilled(!filled);
 					}
 					else {
